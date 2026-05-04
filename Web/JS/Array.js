@@ -1,7 +1,7 @@
 // Array: An array is a container which is used to store a collection of values. It uses indexes to number elements and access them. The index starts from 0 and end at length of array - 1. In JS arrays are denoted using square brackets.
 
 // There are two main ways to create arrays in js:
-    let array = []; // 99% of the time this syntax will be used to create an array. You use this is mostly everything.
+    let array = []; // 99% of the time this syntax will be used to create an array. You use this is for mostly everything.
     let AnotherArray = new Array(); // This creates an array using the Array Constructor. It is typically only used when you want to initialize an array with a large number of empty slots to store values later.
 
 // Here is an example showing the difference between if you used the typical syntax VS the Array Constructor.
@@ -13,7 +13,7 @@
 // This is because the array constructor takes one value as a parameter which is the length of the empty array or the number of the empty items you want to store.
 
 // You can create an array with multiple elements of the same data type or even the different data type:
-let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // An array of elements with same datatype.
 let everyDataType = ["hi", 1, null, undefined, BigInt, 123456789n, {name: "Hassan", age: 16}, Symbol("hi")]
 console.log(numbers)
 console.log(everyDataType)
@@ -35,7 +35,7 @@ numberOfNumbersInArray = numbers.length;
 console.log(numberOfNumbersInArray)
 
 // Accessing the last element using at(): 
-    // Most programming languages allow you to access the last element of a list or an array using index -1. But in javascript you can't do that because the indexes are taken literally, if you use -1 as index it would return undefined because there is no index such as -1. So to solve this issue we use the at() method. :
+    // Most programming languages allow you to access the last element of a list or an array using index -1. But in javascript you can't do that because the indexes are taken literally, if you use -1 as index it would return undefined because there is no index such as -1. So to solve this issue we use the at() method:
     console.log(names[-1]) // This returns undefined because there is no element at index -1.
     console.log(names.at(-1)) // This solves the issue by using the .at() method in js. 
 
@@ -49,8 +49,9 @@ console.log(numberOfNumbersInArray)
 
     // shift(): The shift() method is used to remove the first element from an array and return the removed element:
     let friendNotInvited = friendsInvited.shift()
+    console.log(friendNotInvited)
 
-    // unshift(): The unshift() method is used to add multiple elements to the start or beginning of an array:
+    // unshift(): The unshift() method is used to add multiple elements to the start or beginning of an array. It returns the new length of the array:
     let numberOfPeopleInvited = friendsInvited.unshift("Alice", "Alex")
     console.log(numberOfPeopleInvited)
     console.log(friendsInvited)
@@ -93,3 +94,5 @@ console.log(numberOfNumbersInArray)
 // An important thing to note is that the .push() method and .pop() method are faster than the .shift() and .unshift() method. Which is because they have to perform more operations like first remove or add the item, then update the index of every single element of the array and then update the length property.
 
 // An important thing to note is that the .at() method is a recent addition to the language, it was first added in ECMAScript 2022. The .at() method is an accessor method only you can't use it to change to set a value to a particular index. 
+
+// Don't compare arrays with the "==" operator because it only checks if the values of two different things are equal. Like if you try to compare an empty array to "0" that according to the "==" operator. It results in true even though it is not actually an array.
