@@ -1,4 +1,4 @@
-# Tuples: A tuple is a finite ordered sequence of values. The term "tuple" comes from mathematics. Tuples are immutable (just like strings which means once they have been created their value can't be changed or else it would result in a type error) ordered sequence of values (these values can be duplicate) seperated by comma inside a pair of parenthesis ().
+# Tuples: A tuple is a finite ordered sequence of values. The term "tuple" comes from mathematics. Tuples are immutable (just like strings which means once they have been created their value can't be changed or else it would result in a TypeError) ordered sequence of values (these values can be duplicate) seperated by comma inside a pair of parenthesis ().
 
 # How to Create a Tuple:
     # 1) Tuple Literals: A tuple literal is when you create a tuple by explicity writing out values or items seperated by comma surrounded by a pair of parenthesis.
@@ -50,7 +50,45 @@ print(coordinates_of_my_point) # You can confirm if you formed a tuple by using 
 x_coordinates, y_coordinates = coordinates_of_my_point
 print(f"The x coordinates are: {x_coordinates}, The y coordinates are: {y_coordinates}")
 
-# Checking if a given item is in the tuple or not: You can use the "in" keyword to check if a given item or element is found within a tuple or not.
+# Converting a tuple into a string:
+    # 1) Using the .join() method: The syntax for this method is: seperator.join(your_tuple). It is an important thing to note that this only works if the elements of your tuple are all strings:
+string_of_my_tuple = " ".join(my_tuple)
+print(string_of_my_tuple) # Output: I do it anyways
+
+    # 2) Using the .join() method with map(): The syntax for this method is: seperator.join(map(str, your_tuple)). This syntax is best for if your tuple contains different data types, the map() method applies a specific transformation function to each item in an iteratable:
+every_data_type = ([1, 2, 3], "hi", TypeError, 4.5, 7, True)
+string_of_every_data_type = ", ".join(map(str, every_data_type))
+print(string_of_every_data_type)
+
+# Checking if a given item is in the tuple or not: You can use the "in" keyword to check if a given item or element is found within a tuple or not. In this example we are gonna level up the game a bit instead of simple examples we are gonna include functions, documentation, type hints, and everything else in between:
+def digits_of_decimal() -> tuple:
+    """This function first creates a list of the digits of the decimal number system using a for loop and then coverts the list into a tuple using the tuple constructor"""
+    digits_of_decimal_number_system: list = []
+    for digit in range(1, 10):
+        digits_of_decimal_number_system.append(digit)
+    return tuple(digits_of_decimal_number_system)
+
+digits_of_decimal_number_system: tuple = digits_of_decimal()
+
+def does_username_contains_Num() -> bool:
+    """This function first asks the user your their username and then checks if the username contains a digit from the decimal number system or not and then returns the result as a boolean."""
+    while True:
+        username = input("What is your username? (Your username can only include characters no numbers)")
+        username = username.strip()
+        if not username:
+            print("Enter a username")
+            continue
+        else:
+            break
+    for digit in digits_of_decimal_number_system:
+        if digit in username:
+            print("Your Username contains numbers. We don't allow any numbers in our username.")
+            return False
+        else:
+            return True
+is_number_in_username: bool = does_username_contains_Num()
+
+# This is one method to check if a particular string contains a number or not. Now i am gonna give you an assignment for you to do. Find and document any alternative methods to check if a particular string contains a number or not.
 
 # ---------------------------------------- Important Note --------------------------------------------
 # You can have trailing commas in tuples, this helps in inserting or removing items because all the elements of a tuple or lines look the same way.
