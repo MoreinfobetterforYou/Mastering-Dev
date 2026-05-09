@@ -5,7 +5,7 @@ def greet():
 # Invoking or Calling a function:  Is when you actually run the function by writing the name of the followed by a set of parenthesis().
 greet() # This is when we actually invoke the function causing the program to print Hello Hassan!
 
-# We can make functions more reuseable by using parameters which are placeholders for the values that will be passed when the function is called or invoked.
+# We can make functions more reuseable by using parameters which are placeholders for the values that will be passed when the function is called or invoked, these values are called the arguments.
 def greetTheUser(userName):
     print(f"Hello {userName}!")
 greetTheUser("John Doe")
@@ -18,7 +18,7 @@ hello()
 # A function can also have more than one parameter which are seperated by using a comma. But one important thing that you need to consider is the fact that you need to give the arguments in the same order in which you defined the parameters.
 def printInfo(userName = "Guest", age = 0):
     print(f"{userName} is {age} years old")
-printInfo("Bob", 18) # In positional arguments the order matters.
+printInfo("Bob", 18) # In positional arguments the order matters. By default the arguments passed in most functions are position arguments.
 
 # Keyword Arguments: Is similar to positional arguments allowing you to have more than one argument and parameter to your function but the main difference is that in positional argument the order matters while in keyword arguments you can invoke or call a function by explicitly naming the parameters thus the order of the arguments does not matter. It also helps in readability of the code.
 printInfo(age = 24, userName = "John Doe")
@@ -30,7 +30,7 @@ numberOfCharactersInUserName = lengthOfName("John Doe")
 print(f"The number of charaters in the usersName is {numberOfCharactersInUserName}")
 
 # Specifiying the DataTypes of Parameters and Function: In python you are able to specify datatype for function parameters and the whole function using:
-    # Type hints (often called type annonations). This is done by adding a colon (:) after the parameter name and then the data type. This helps you to identify errors and help in type checking. You can also -> to tell the type of value a function returns. If a function doesn't return anything like prints some value then it has the default Type None
+    # Type hints (often called type annonations). This is done by adding a colon (:) after the parameter name and then the data type. This helps you to identify errors and help in type checking. You can also -> to tell the type of value a function returns. If a function doesn't return anything like prints some value then it has the default type None
 def message(userName: str) -> None:
     print(f"Welcome to the World of Python {userName}")
 message("Bob")
