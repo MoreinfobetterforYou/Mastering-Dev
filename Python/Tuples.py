@@ -25,9 +25,10 @@ print(times_repeated)
 index_of_I = my_tuple.index("I")
 print(index_of_I)
 
-# sorted(): The sorted() function in python is used to return a new sorted version of the tuple in python:
-sorted_tuple = sorted(my_tuple)
-print(sorted_tuple)
+# sorted(): The sorted() function in python is used to return a new sorted version of the iterable as a list in python:
+sorted_list = sorted(my_tuple) # returns it as a list
+sorted_tuple = tuple(sorted_list) # We need to convert the list into a tuple.
+print(f"The sorted my_tuple is: {sorted_tuple}")
 
 # slice(): The slice() function in python is used to return a sliced object, in simpler terms it is used to extract a specific part of a data structure. It takes three parameteres: (start, stop, step)
     # Long syntax: 
@@ -62,33 +63,77 @@ print(string_of_every_data_type)
 
 # Checking if a given item is in the tuple or not: You can use the "in" keyword to check if a given item or element is found within a tuple or not. In this example we are gonna level up the game a bit instead of simple examples we are gonna include functions, documentation, type hints, and everything else in between:
 def digits_of_decimal() -> tuple:
-    """This function first creates a list of the digits of the decimal number system using a for loop and then coverts the list into a tuple using the tuple constructor"""
-    digits_of_decimal_number_system: list = []
-    for digit in range(1, 10):
-        digits_of_decimal_number_system.append(digit)
-    return tuple(digits_of_decimal_number_system)
+    """This function uses the tuple constructor to convert the range object from the range() function into  a tuple."""
+    return tuple(range(0, 10))
 
 digits_of_decimal_number_system: tuple = digits_of_decimal()
 
-def does_username_contains_Num() -> bool:
-    """This function first asks the user your their username and then checks if the username contains a digit from the decimal number system or not and then returns the result as a boolean."""
+def is_digit_in_username(username: str) -> bool:
+    for digit in digits_of_decimal_number_system:
+        if str(digit) in username:
+            return True
+    return False
+
+def user_name_auth() -> bool:
+    """This function first asks the user your their username and then checks if the given username is valid or not by using a combination of try/except and calling another function"""
     while True:
-        username = input("What is your username? (Your username can only include characters no numbers)")
+        username = input("\n What is your username? (Your username can only include characters no numbers): \n\t")
+        username = username.strip()
+        boolean = is_digit_in_username(username)
+        if not username:
+            print("Please enter a username. ")
+        elif boolean:
+            print("Please enter a valid username. (Don't enter a number)")
+        else:
+            print(f"Your username is: {username}")
+            return username
+
+valid_username = user_name_auth()
+print(f"Successfully added user: '{valid_username}' to the database.\n")
+
+# This is one method to check if a particular string contains a number or not. A more efficient way to implement this is to use the any() function. The any() function in python checks if any value in an iteratable is true and returns true if it finds a True value. To check if a particular character is a digit we use isdigit() function to check for this case.
+def check_for_digit(username) -> bool:
+    return any(char.isdigit() for char in username)
+
+def ask_user() -> str:
+    while True:
+        username = input("\nEnter your username: \n\t")
         username = username.strip()
         if not username:
-            print("Enter a username")
-            continue
+            print("\nEnter a username!!!")
+        elif check_for_digit(username):
+            print("\nEnter a valid username. (Username can't contain a number)")
         else:
-            break
-    for digit in digits_of_decimal_number_system:
-        if digit in username:
-            print("Your Username contains numbers. We don't allow any numbers in our username.")
-            return False
-        else:
-            return True
-is_number_in_username: bool = does_username_contains_Num()
+            print(f"Your username is: {username}")
+            return username
+        
+valid_username = ask_user()
+print(f"Successfully added user: {valid_username} to the database.")
 
-# This is one method to check if a particular string contains a number or not. Now i am gonna give you an assignment for you to do. Find and document any alternative methods to check if a particular string contains a number or not.
+# Nested Tuples: Nested Tuples are essentially tuples inside other tuples. For example, this is a tuple of x and y coordinates stored as tuples in a tuples.
+coordinates = ((1, 2), (4, 5), (-1, -5), (-4, -2))
+x_coordinate_of_4th_point = coordinates[3][0]
+print(f"The x coordinate of the 4th point is: {x_coordinate_of_4th_point}")
+
+# Single Element Tuples: There is an important thing you need to know before creating single element tuples. Tuples with a single element such as lets say an integers have the data type of an integer rather than a tuple to actually create a single element tuple you need to have a trailing comma after that element:
+not_single_integer_tuple = (5) # You may think that this is a tuple but it actually is not and you check it by using the type() function:
+print(type(not_single_integer_tuple)) # Output: <class 'int'>
+
+single_integer_tuple = (5,) # This is the actual way to create a single element tuple by using a trailing comma after it.
+print(type(single_integer_tuple))
+
+# Performance of Tuples: 
+    # Memory Efficiency: Tuples are better than lists in terms of memory efficiency. This is because tuples occupy the exact space needed for the elements inside them, they don't occupy excess space. Lists on the other hand over allocates space in the memory to account for future operations. We can check this by the .getsizeof() method from the sys module:
+import sys
+same_list = [1, 2, 3]
+same_tuple = (1, 2, 3)
+print(f"Size of the list is: {sys.getsizeof(same_list)} bytes")
+print(f"Size of the tuple is: {sys.getsizeof(same_tuple)} bytes")
+
+    # Creation Speed: Tuples can be initialized faster than lists. Tuples are approximately 86% faster in creation speed than lists. This is because python is able to reuse existing tuples to create new ones, whereas with lists you need to create a new list every time and also need to allocate additional space for future operations. We can check this by using the timeit module:
+import timeit
+print(f"Time taken to initialize list is: {round(timeit.timeit('[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]'), 3)}s")
+print(f"Time taken to initialize tuple is: {round(timeit.timeit('(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)'), 3)}s")
 
 # ---------------------------------------- Important Note --------------------------------------------
 # You can have trailing commas in tuples, this helps in inserting or removing items because all the elements of a tuple or lines look the same way.
