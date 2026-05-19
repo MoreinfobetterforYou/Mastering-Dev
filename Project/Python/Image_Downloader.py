@@ -35,7 +35,7 @@ response_from_img_api = req.get(url, params=params, headers = headers)
 if response_from_img_api.status_code == 200:
     currentDirectory = os.getcwd()
     newFolderPath = os.path.join(currentDirectory, f"{query.strip().lower()}")
-    os.mkdir(newFolderPath, exist_ok = True)
+    os.makedirs(newFolderPath, exist_ok = True)
     data = response_from_img_api.json()
     try:
         with open(f"{os.path.join(newFolderPath, f"{query.strip().lower()}")}.json", "r") as file:
